@@ -10,9 +10,9 @@ const Layout = function LayoutComponent() {
     <>
       <Header />
 
-      <main className="content">
+      <Box component="main" sx={{ pb: '5rem' }} className="content">
         <Outlet />
-      </main>
+      </Box>
 
       {/* <Footer /> */}
     </>
