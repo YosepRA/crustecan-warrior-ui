@@ -38,6 +38,8 @@ const LoadMoreButton = function LoadMoreButtonComponent({
   );
 };
 
+/* ========== Main component ========== */
+
 const FixtureList = function FixtureListComponent({
   search,
   handleSearchChange,
