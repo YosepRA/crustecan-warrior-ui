@@ -5,11 +5,10 @@ import { promiseResolver } from '../../utilities/helpers.js';
 const { VITE_API_ENDPOINT } = import.meta.env;
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = `${VITE_API_ENDPOINT}/user`;
 
 async function login(payload) {
   const [response, loginError] = await promiseResolver(
-    axios.post('/login', payload),
+    axios.post(`${VITE_API_ENDPOINT}/user/login`, payload),
   );
 
   if (loginError) {
@@ -23,7 +22,7 @@ async function login(payload) {
 
 async function register(payload) {
   const [response, loginError] = await promiseResolver(
-    axios.post('/register', payload),
+    axios.post(`${VITE_API_ENDPOINT}/user/register`, payload),
   );
 
   if (loginError) {
@@ -37,7 +36,7 @@ async function register(payload) {
 
 async function getLoginSession() {
   const [response, loginSessionError] = await promiseResolver(
-    axios.get('/login-session'),
+    axios.get(`${VITE_API_ENDPOINT}/user/login-session`),
   );
 
   if (loginSessionError) {
@@ -50,7 +49,9 @@ async function getLoginSession() {
 }
 
 async function logout() {
-  const [response, logoutError] = await promiseResolver(axios.get('/logout'));
+  const [response, logoutError] = await promiseResolver(
+    axios.get(`${VITE_API_ENDPOINT}/user/logout`),
+  );
 
   if (logoutError) {
     throw logoutError;

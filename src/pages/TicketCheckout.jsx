@@ -1,0 +1,59 @@
+import React from 'react';
+import { Routes, Route, Navigate, useParams } from 'react-router-dom';
+import { Formik } from 'formik';
+import Container from '@mui/material/Container';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import TicketCheckoutStepper from '../components/TicketCheckoutStepper.jsx';
+import TicketCheckoutSeat from '../components/TicketCheckoutSeat.jsx';
+import TicketCheckoutPayment from '../components/TicketCheckoutPayment.jsx';
+import { useGetTicketFixtureDetailsQuery } from '../store/services/ticket-fixture.js';
+
+const initialValues = {
+  orders: [
+    {
+      section: '',
+      seatNumber: '',
+    },
+  ],
+};
+
+const TicketCheckout = function TicketCheckoutComponent() {
+  const { fixtureId } = useParams();
+  const queryArguments = { fixtureId };
+  const { data: fixture, isLoading } =
+    useGetTicketFixtureDetailsQuery(queryArguments);
+
+  return (
+    <Container>
+      <TicketCheckoutStepper />
+
+      {isLoading ? (
+        <CircularProgress sx={{ display: 'block', mx: 'auto', my: 2 }} />
+      ) : (
+        <Formik initialValues={initialValues}>
+          {(formikProps) => (
+            <Routes>
+              <Route
+                path="seat-selection"
+                element={
+                  <TicketCheckoutSeat
+                    fixture={fixture.data}
+                    formikProps={formikProps}
+                  />
+                }
+              />
+              <Route
+                path="payment"
+                element={<TicketCheckoutPayment formikProps={formikProps} />}
+              />
+              <Route path="*" element={<Navigate to="seat-selection" />} />
+            </Routes>
+          )}
+        </Formik>
+      )}
+    </Container>
+  );
+};
+
+export default TicketCheckout;

@@ -2,7 +2,7 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
-import { login, register, getLoginSession, logout } from './userAPI.js';
+import { login, register, getLoginSession, logout } from './user-api.js';
 import { promiseResolver } from '../../utilities/helpers.js';
 
 const initialState = {

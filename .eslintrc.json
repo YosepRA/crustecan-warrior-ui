@@ -26,6 +26,7 @@
     "react/prop-types": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/jsx-wrap-multilines": "off",
     "import/extensions": ["error", "always", { "ignorePackages": true }],
     "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],

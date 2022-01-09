@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 /* Parse search params to plain object. */
 const withSearchParams = (WrappedComponent) => (props) => {
-  const [search, setSearch] = useState({ increment: 1 });
+  const [search, setSearch] = useState({});
   const { search: searchLocation } = useLocation();
   const navigate = useNavigate();
 

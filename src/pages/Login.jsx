@@ -12,7 +12,7 @@ import UserPromptWrapper from '../components/styled/UserPromptWrapper.jsx';
 import UserPromptHeader from '../components/styled/UserPromptHeader.jsx';
 import UserPromptTextField from '../components/styled/UserPromptTextField.jsx';
 import LineSeparator from '../components/styled/LineSeparator.jsx';
-import { loginThunk, setUserError } from '../store/user/userSlice.js';
+import { loginThunk, setUserError } from '../store/user/user-slice.js';
 
 // Formik initial values.
 const initialValues = {
@@ -50,7 +50,7 @@ const Login = function LoginComponent() {
     dispatch(loginThunk(loginThunkPayload));
   };
 
-  /* ========== Component return. ========== */
+  /* ========== Render. ========== */
 
   return (
     <Container>

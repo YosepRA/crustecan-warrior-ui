@@ -11,7 +11,7 @@ import { styled, easing } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
-import { logoutThunk } from '../store/user/userSlice.js';
+import { logoutThunk } from '../store/user/user-slice.js';
 
 /* We'll be using two different navigation menu for mobile and desktop to
 accomplish intended design. */

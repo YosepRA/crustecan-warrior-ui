@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { registerThunk, setUserError } from '../store/user/userSlice.js';
+import { registerThunk, setUserError } from '../store/user/user-slice.js';
 import UserPromptWrapper from '../components/styled/UserPromptWrapper.jsx';
 import UserPromptHeader from '../components/styled/UserPromptHeader.jsx';
 import UserPromptTextField from '../components/styled/UserPromptTextField.jsx';
@@ -75,7 +75,7 @@ const Register = function LoginComponent() {
     dispatch(registerThunk(registerThunkPayload));
   };
 
-  /* ========== Component return. ========== */
+  /* ========== Render. ========== */
 
   return (
     <Container>
