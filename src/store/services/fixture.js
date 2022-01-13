@@ -7,12 +7,16 @@ const fixtureApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: `${VITE_API_ENDPOINT}/fixture` }),
   endpoints: (builder) => ({
     getFixtureList: builder.query({
-      query: ({ increment, includeSeat }) =>
-        `?increment=${increment}&includeSeat=${includeSeat}`,
+      query: ({ increment, includeSeat, homeOnly }) =>
+        `?increment=${increment}&includeSeat=${includeSeat}&homeOnly=${homeOnly}`,
+    }),
+    getFixtureDetails: builder.query({
+      query: ({ fixtureId, includeSeat }) =>
+        `/${fixtureId}?includeSeat=${includeSeat}`,
     }),
   }),
 });
 
-export const { useGetFixtureListQuery } = fixtureApi;
+export const { useGetFixtureListQuery, useGetFixtureDetailsQuery } = fixtureApi;
 
 export default fixtureApi;

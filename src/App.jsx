@@ -52,9 +52,31 @@ const App = function AppComponent() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="fixtures" element={<FixtureList />} />
+              <Route
+                path="fixtures"
+                element={
+                  <FixtureList
+                    initialSearch={{
+                      increment: 1,
+                      includeSeat: false,
+                      homeOnly: false,
+                    }}
+                  />
+                }
+              />
               <Route path="ticket">
-                <Route path="fixtures" element={<TicketFixtureList />} />
+                <Route
+                  path="fixtures"
+                  element={
+                    <TicketFixtureList
+                      initialSearch={{
+                        increment: 1,
+                        includeSeat: false,
+                        homeOnly: true,
+                      }}
+                    />
+                  }
+                />
                 <Route path="search" element={<TicketSearch />} />
                 <Route
                   path="checkout/:fixtureId/*"

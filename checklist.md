@@ -14,3 +14,6 @@ Random thoughts and concerns while on development. Finished items will have ✅ 
   - No same seat.
 - Global notification system.
 - Global loading page system.
+- Work on the footer.
+- Search page input to use search glass icon as input adornment.
+- Search page input to have small cross icon button to reset the field.

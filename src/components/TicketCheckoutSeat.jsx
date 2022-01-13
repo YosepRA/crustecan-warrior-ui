@@ -11,7 +11,6 @@ const TicketCheckoutSeat = function TicketCheckoutSeatComponent({
   fixture,
   formikProps: {
     values: { orders },
-    setFieldValue,
   },
 }) {
   const navigate = useNavigate();

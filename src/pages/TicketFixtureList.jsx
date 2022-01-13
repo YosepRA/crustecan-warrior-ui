@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
-import { useGetTicketFixtureListQuery } from '../store/services/ticket-fixture.js';
+import { useGetFixtureListQuery } from '../store/services/fixture.js';
 import FixtureCard from '../components/FixtureCard.jsx';
 import withSearchParams from '../components/withSearchParams.jsx';
 
@@ -40,16 +40,20 @@ const LoadMoreButton = function LoadMoreButtonComponent({
 
 /* ========== Main component ========== */
 
-const FixtureList = function FixtureListComponent({
+const TicketFixtureList = function TicketFixtureListComponent({
   search,
   handleSearchChange,
 }) {
-  const queryArguments = { increment: search.increment || 1 };
+  const queryArguments = {
+    increment: search.increment || 1,
+    includeSeat: search.includeSeat || false,
+    homeOnly: search.homeOnly || true,
+  };
   const {
     data: fixtures,
     isLoading,
     isFetching,
-  } = useGetTicketFixtureListQuery(queryArguments);
+  } = useGetFixtureListQuery(queryArguments);
 
   /* ========== Event handlers ========== */
 
@@ -96,4 +100,4 @@ const FixtureList = function FixtureListComponent({
   );
 };
 
-export default withSearchParams(FixtureList);
+export default withSearchParams(TicketFixtureList);

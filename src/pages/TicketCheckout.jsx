@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import TicketCheckoutStepper from '../components/TicketCheckoutStepper.jsx';
 import TicketCheckoutSeat from '../components/TicketCheckoutSeat.jsx';
 import TicketCheckoutPayment from '../components/TicketCheckoutPayment.jsx';
-import { useGetTicketFixtureDetailsQuery } from '../store/services/ticket-fixture.js';
+import { useGetFixtureDetailsQuery } from '../store/services/fixture.js';
 
 const initialValues = {
   orders: [
@@ -20,9 +20,9 @@ const initialValues = {
 
 const TicketCheckout = function TicketCheckoutComponent() {
   const { fixtureId } = useParams();
-  const queryArguments = { fixtureId };
+  const queryArguments = { fixtureId, includeSeat: true };
   const { data: fixture, isLoading } =
-    useGetTicketFixtureDetailsQuery(queryArguments);
+    useGetFixtureDetailsQuery(queryArguments);
 
   return (
     <Container>

@@ -1,10 +1,13 @@
+/* eslint-disable indent */
 /* eslint-disable react/function-component-definition */
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 /* Parse search params to plain object. */
 const withSearchParams = (WrappedComponent) => (props) => {
-  const [search, setSearch] = useState({});
+  const { initialSearch } = props;
+
+  const [search, setSearch] = useState(initialSearch || {});
   const { search: searchLocation } = useLocation();
   const navigate = useNavigate();
 
@@ -18,9 +21,10 @@ const withSearchParams = (WrappedComponent) => (props) => {
       result[key] = Number.isNaN(numberValue) ? value : numberValue;
     });
 
-    setSearch(result);
+    setSearch({ ...initialSearch, ...result });
   }, [searchLocation]);
 
+  // Turn search object to query string and navigate with the new query params.
   const handleSearchChange = (searchObject) => {
     const searchParams = new URLSearchParams();
 

@@ -46,7 +46,8 @@ const FixtureList = function FixtureListComponent({
 }) {
   const queryArguments = {
     increment: search.increment || 1,
-    includeSeat: false,
+    includeSeat: search.includeSeat || false,
+    homeOnly: search.homeOnly || false,
   };
   const {
     data: fixtures,
