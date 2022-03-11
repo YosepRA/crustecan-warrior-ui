@@ -7,11 +7,11 @@ const ticketApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: `${VITE_API_ENDPOINT}/ticket` }),
   endpoints: (builder) => ({
     getTicketDetails: builder.query({
-      query: ({ ticketId }) => `/${ticketId}`,
+      query: (ticketId) => `/${ticketId}`,
     }),
   }),
 });
 
-export const { useGetTicketDetailsQuery } = ticketApi;
+export const { useLazyGetTicketDetailsQuery } = ticketApi;
 
 export default ticketApi;

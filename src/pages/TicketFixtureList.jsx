@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
-import { useGetFixtureListQuery } from '../store/services/fixture.js';
+import { useGetFixtureListQuery } from '../store/fixture/service.js';
 import FixtureCard from '../components/FixtureCard.jsx';
 import withSearchParams from '../components/withSearchParams.jsx';
 

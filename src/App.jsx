@@ -21,7 +21,10 @@ import TicketCheckoutResult from './pages/TicketCheckoutResult.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
-import { getLoginSessionThunk } from './store/user/user-slice.js';
+import Overview from './components/dashboard/Overview.jsx';
+import TicketList from './components/dashboard/TicketList.jsx';
+import TransactionList from './components/dashboard/TransactionList.jsx';
+import { getLoginSessionThunk } from './store/user/slice.js';
 
 import '@fontsource/roboto';
 import '@fontsource/oswald/400.css';
@@ -94,7 +97,24 @@ const App = function AppComponent() {
                     <Dashboard />
                   </RequireAuth>
                 }
-              />
+              >
+                <Route index element={<Navigate to="overview" />} />
+                <Route path="overview" element={<Overview />} />
+                <Route
+                  path="ticket"
+                  element={
+                    <TicketList initialSearch={{ latest: false, page: 1 }} />
+                  }
+                />
+                <Route
+                  path="transaction"
+                  element={
+                    <TransactionList
+                      initialSearch={{ latest: false, page: 1 }}
+                    />
+                  }
+                />
+              </Route>
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
             </Route>

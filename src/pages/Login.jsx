@@ -12,7 +12,7 @@ import UserPromptWrapper from '../components/styled/UserPromptWrapper.jsx';
 import UserPromptHeader from '../components/styled/UserPromptHeader.jsx';
 import UserPromptTextField from '../components/styled/UserPromptTextField.jsx';
 import LineSeparator from '../components/styled/LineSeparator.jsx';
-import { loginThunk, setUserError } from '../store/user/user-slice.js';
+import { loginThunk, setUserError } from '../store/user/slice.js';
 
 // Formik initial values.
 const initialValues = {
@@ -21,12 +21,13 @@ const initialValues = {
 };
 
 const Login = function LoginComponent() {
-  const { error } = useSelector((state) => state.user);
+  const { authenticated, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || '/dashboard';
+  const searchString = location.state?.from?.search || '';
 
   const resetUserError = () => {
     const setUserErrorPayload = { status: false, message: '' };
@@ -37,6 +38,11 @@ const Login = function LoginComponent() {
   /* ========== Effect hooks. ========== */
 
   useEffect(() => resetUserError, []);
+  useEffect(() => {
+    if (authenticated) {
+      navigate({ pathname: from, search: searchString }, { replace: true });
+    }
+  }, [authenticated]);
 
   /* ========== Event handlers. ========== */
 

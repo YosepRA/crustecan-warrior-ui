@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createCheckoutSession as createCheckoutSessionAPI } from './checkout-api.js';
+import { createCheckoutSession as createCheckoutSessionAPI } from './api.js';
 
 const initialState = {
   loading: false,

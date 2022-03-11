@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { format } from 'date-fns';
@@ -7,11 +6,11 @@ import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const TicketSearchResult = function TicketSearchResultComponent({
+  ticket,
+  isLoading,
   hasSubmitted,
 }) {
-  const ticket = useSelector((state) => state.ticket);
-
-  if (!hasSubmitted) {
+  if (!ticket || !hasSubmitted) {
     return (
       <Box component="section">
         <Typography variant="h5" component="h2" color="textSecondary">
@@ -36,7 +35,6 @@ const TicketSearchResult = function TicketSearchResultComponent({
   }
 
   const {
-    loading,
     data: {
       _id,
       seat: { section, seatNumber },
@@ -44,7 +42,7 @@ const TicketSearchResult = function TicketSearchResultComponent({
     },
   } = ticket;
 
-  if (loading) {
+  if (isLoading) {
     return <CircularProgress sx={{ display: 'block', mx: 'auto', my: 2 }} />;
   }
 

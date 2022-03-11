@@ -9,7 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
-import { createCheckoutSession } from '../store/checkout/checkout-slice.js';
+import { createCheckoutSession } from '../store/checkout/slice.js';
 
 const paymentOptionModel = [
   { label: 'Credit Card', icon: CreditCardIcon, value: 'credit-card' },
@@ -103,8 +103,6 @@ const TicketCheckoutPayment = function TicketCheckoutPaymentComponent({
     const payload = { fixtureId, orders };
 
     dispatch(createCheckoutSession(payload));
-
-    console.log(sessionURL);
   };
 
   let loadMoreText = '';

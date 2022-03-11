@@ -1,11 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import Typography from '@mui/material/Typography';
+import { Outlet } from 'react-router-dom';
+import Container from '@mui/material/Container';
+
+import Navigation from '../components/dashboard/Navigation.jsx';
 
 const Dashboard = function DashboardComponent() {
-  const user = useSelector((state) => state.user);
+  return (
+    <Container>
+      <Navigation />
 
-  return <Typography variant="h4">Welcome {user.username}</Typography>;
+      <Outlet />
+    </Container>
+  );
 };
 
 export default Dashboard;

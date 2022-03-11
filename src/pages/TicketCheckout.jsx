@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import TicketCheckoutStepper from '../components/TicketCheckoutStepper.jsx';
 import TicketCheckoutSeat from '../components/TicketCheckoutSeat.jsx';
 import TicketCheckoutPayment from '../components/TicketCheckoutPayment.jsx';
-import { useGetFixtureDetailsQuery } from '../store/services/fixture.js';
+import { useGetFixtureDetailsQuery } from '../store/fixture/service.js';
 
 const initialValues = {
   orders: [

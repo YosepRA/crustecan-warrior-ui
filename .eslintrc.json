@@ -28,10 +28,15 @@
     "react/jsx-props-no-spreading": "off",
     "react/jsx-wrap-multilines": "off",
     "import/extensions": ["error", "always", { "ignorePackages": true }],
-    "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "indent": [
+      "error",
+      2,
+      { "SwitchCase": 1, "offsetTernaryExpressions": true }
+    ],
+    "no-confusing-arrow": "off"
   },
   "settings": {
     "react": {
