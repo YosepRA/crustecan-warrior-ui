@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 
 import { useGetTicketListQuery } from '../../store/dashboard/service.js';
-import TicketCard from './TicketCard.jsx';
+import TicketCard from '../ticket/TicketCard.jsx';
 
 const OverviewTicket = function OverviewTicketComponent() {
   const { data: queryData, isLoading } = useGetTicketListQuery({
@@ -35,7 +35,7 @@ const OverviewTicket = function OverviewTicketComponent() {
 
       <Box className="overview__list" sx={{ mb: 2 }}>
         {tickets.map((ticket) => (
-          <TicketCard key={ticket._id} ticket={ticket} />
+          <TicketCard key={ticket._id} ticket={ticket} showDownloadBtn />
         ))}
       </Box>
 

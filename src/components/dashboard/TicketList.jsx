@@ -6,7 +6,7 @@ import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 
 import { useGetTicketListQuery } from '../../store/dashboard/service.js';
-import TicketCard from './TicketCard.jsx';
+import TicketCard from '../ticket/TicketCard.jsx';
 import withSearchParams from '../withSearchParams.jsx';
 
 const TicketList = function TicketListComponent({ search }) {
@@ -34,7 +34,7 @@ const TicketList = function TicketListComponent({ search }) {
     <Box component="section" className="ticket-list">
       <Box className="ticket-list__list" sx={{ mb: 5 }}>
         {tickets.map((ticket) => (
-          <TicketCard key={ticket._id} ticket={ticket} />
+          <TicketCard key={ticket._id} ticket={ticket} showDownloadBtn />
         ))}
       </Box>
 

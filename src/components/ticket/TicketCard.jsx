@@ -16,7 +16,7 @@ function createBarcode(id) {
   return canvas.toDataURL();
 }
 
-const TicketCard = function TicketCardComponent({ ticket }) {
+const TicketCard = function TicketCardComponent({ ticket, showDownloadBtn }) {
   const {
     seat,
     fixture: { date, homeTeam, awayTeam, event },
@@ -53,7 +53,7 @@ const TicketCard = function TicketCardComponent({ ticket }) {
       className="ticket"
       sx={{ p: 2, ':not(:last-child)': { mb: 1 } }}
     >
-      <Box className="ticket__fixture" sx={{ mb: 3 }}>
+      <Box className="ticket__fixture">
         <Typography className="ticket__event" sx={{ mb: 1 }}>
           {event}
         </Typography>
@@ -62,7 +62,7 @@ const TicketCard = function TicketCardComponent({ ticket }) {
           {dateString}
         </Typography>
 
-        <Box className="ticket__main-info" sx={{ py: 2, textAlign: 'center' }}>
+        <Box className="ticket__main-info" sx={{ py: 3, textAlign: 'center' }}>
           <Typography
             className="ticket__teams"
             sx={{ mb: 1, fontSize: '1.1rem' }}
@@ -76,18 +76,20 @@ const TicketCard = function TicketCardComponent({ ticket }) {
         </Box>
       </Box>
 
-      <Box className="ticket__action">
-        <Button
-          className="ticket__download"
-          aria-label="download"
-          variant="outlined"
-          color="primary"
-          startIcon={<DownloadIcon />}
-          onClick={() => handleDownload(ticket)}
-        >
-          Download PDF
-        </Button>
-      </Box>
+      {showDownloadBtn && (
+        <Box className="ticket__action" sx={{ mt: 3 }}>
+          <Button
+            className="ticket__download"
+            aria-label="download"
+            variant="outlined"
+            color="primary"
+            startIcon={<DownloadIcon />}
+            onClick={() => handleDownload(ticket)}
+          >
+            Download PDF
+          </Button>
+        </Box>
+      )}
     </Paper>
   );
 };

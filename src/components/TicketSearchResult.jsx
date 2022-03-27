@@ -1,15 +1,19 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { format } from 'date-fns';
-import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';
+
+import TicketCard from './ticket/TicketCard.jsx';
 
 const TicketSearchResult = function TicketSearchResultComponent({
   ticket,
   isLoading,
   hasSubmitted,
 }) {
+  if (isLoading) {
+    return <CircularProgress sx={{ display: 'block', mx: 'auto', my: 2 }} />;
+  }
+
   if (!ticket || !hasSubmitted) {
     return (
       <Box component="section">
@@ -20,7 +24,7 @@ const TicketSearchResult = function TicketSearchResultComponent({
     );
   }
 
-  if (ticket.data === null) {
+  if (!ticket.data) {
     return (
       <Box component="section">
         <Typography variant="h5" sx={{ mb: 2, textAlign: 'center' }}>
@@ -34,46 +38,13 @@ const TicketSearchResult = function TicketSearchResultComponent({
     );
   }
 
-  const {
-    data: {
-      _id,
-      seat: { section, seatNumber },
-      fixture: { homeTeam, awayTeam, event, date },
-    },
-  } = ticket;
-
-  if (isLoading) {
-    return <CircularProgress sx={{ display: 'block', mx: 'auto', my: 2 }} />;
-  }
-
   return (
     <Box component="section">
       <Typography variant="h5" sx={{ mb: 2, textAlign: 'center' }}>
         Search Result
       </Typography>
 
-      <Paper sx={{ p: 2, ':not(:last-child)': { mb: 1 } }} elevation={2}>
-        <Box component="section" className="ticket-meta" sx={{ mb: 1 }}>
-          <Typography variant="body2">
-            <b>{_id}</b>
-          </Typography>
-        </Box>
-
-        <Box component="section" className="ticket-details">
-          <Typography variant="h6" sx={{ py: 3, textAlign: 'center' }}>
-            {homeTeam} vs {awayTeam}
-          </Typography>
-
-          <Typography>Seat: {`${section}-${seatNumber}`}</Typography>
-          <Typography>Event: {event}</Typography>
-
-          {date && (
-            <Typography>
-              Time: {format(new Date(date), 'EEEE, MMMM d, yyyy - HH:mm')}
-            </Typography>
-          )}
-        </Box>
-      </Paper>
+      <TicketCard ticket={ticket.data} />
     </Box>
   );
 };

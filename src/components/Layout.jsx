@@ -2,13 +2,13 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
 
-import Header from './Header.jsx';
-import Footer from './Footer.jsx';
+import MainNavigation from './MainNavigation.jsx';
+// import Footer from './Footer.jsx';
 
 const Layout = function LayoutComponent() {
   return (
     <>
-      <Header />
+      <MainNavigation />
 
       <Box component="main" sx={{ pb: '5rem' }} className="content">
         <Outlet />
