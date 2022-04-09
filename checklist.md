@@ -23,6 +23,10 @@ Random thoughts and concerns while on development. Finished items will have ✅ 
 - Pagination shield. If there's only 3 total pages, users can't manually type `page=21` in URL search params.
 - Replace your mobile menu slider according to Material Design.
 - Home page. Please... Look at how miserable it is. 😭
+- Fixture details.
+  - Scoresheet.
+  - Highlight using text. Imagine Google sport timeline.
+- Checkout to have its own navigation bar. To minimize distraction while checking out, remove any unnecessary elements. Imagine this navbar to have that "back button" that will direct user back to "buy ticket" page. Again, it shouldn't be fancy at all. Minimize distraction is the goal.
 
 ## Fixes/Refactors
 
@@ -43,3 +47,4 @@ Random thoughts and concerns while on development. Finished items will have ✅ 
 - Do you need ticket details page? No. ✅
 - Design inconsistencies of ticket card between `TicketSearch` and `Dashboard`.
 - Refactor `Header` component for its styled components and smaller components.
+- Delete 'LogoDemo' component from styled components folder once you have your logo SVG ready.

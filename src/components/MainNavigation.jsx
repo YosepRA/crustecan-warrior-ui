@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Slide from '@mui/material/Slide';
 import { easing } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { logoutThunk } from '../store/user/slice.js';
-import BrandLink from './styled/BrandLink.jsx';
+import DemoLogo from './styled/DemoLogo.jsx';
 import MainNavigationMenuMobile from './MainNavigationMenuMobile.jsx';
 import MainNavigationMenuDesktop from './MainNavigationMenuDesktop.jsx';
 
-const Header = function HeaderComponent() {
+const Header = function HeaderComponent({ scrollTrigger }) {
   const [open, setOpen] = useState(false);
   const authenticated = useSelector((state) => state.user.authenticated);
   const dispatch = useDispatch();
@@ -47,35 +46,41 @@ const Header = function HeaderComponent() {
   };
 
   return (
-    <Box component="nav" sx={{ mb: 2 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, textAlign: { sm: 'center' } }}
-          >
-            <BrandLink to="/">Crustecan Warrior</BrandLink>
-          </Typography>
+    <Box component="nav">
+      <Slide appear={false} direction="down" in={!scrollTrigger}>
+        <AppBar sx={{ bgcolor: 'common.white', color: 'text.primary' }}>
+          <Toolbar sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
+            <Box
+              sx={{
+                flex: '100%',
+                height: '16px',
+                mx: -2,
+                bgcolor: 'primary.main',
+              }}
+            />
 
-          <IconButton
-            size="large"
-            color="inherit"
-            aria-label="menu"
-            sx={{
-              display: { sm: 'none' },
-            }}
-            onClick={() => handleOpen(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+            <Link to="/">
+              <DemoLogo />
+            </Link>
 
-      <MainNavigationMenuDesktop
-        authenticated={authenticated}
-        handleLogout={handleLogout}
-      />
+            <IconButton
+              size="large"
+              aria-label="menu"
+              sx={{
+                display: { sm: 'none' },
+              }}
+              onClick={() => handleOpen(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
+
+          <MainNavigationMenuDesktop
+            authenticated={authenticated}
+            handleLogout={handleLogout}
+          />
+        </AppBar>
+      </Slide>
 
       <Slide
         direction="left"

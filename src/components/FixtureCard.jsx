@@ -1,45 +1,86 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
-const FixtureCard = function FixtureCardComponent({ fixture, buyButton }) {
-  const navigate = useNavigate();
+import FixtureCardTeamName from './styled/FixtureCardTeamName.jsx';
 
-  const date = new Date(fixture.date);
-
-  const handleBuyButton = () => {
-    const checkoutUrl = `/ticket/checkout/${fixture._id}`;
-
-    navigate(checkoutUrl);
-  };
+const FixtureCard = function FixtureCardComponent({
+  fixture,
+  buyButton,
+  featured,
+}) {
+  const { _id, event, date, homeTeam, awayTeam } = fixture;
+  const checkoutUrl = `/ticket/checkout/${_id}`;
 
   return (
-    <Paper sx={{ p: 2, ':not(:last-child)': { mb: 1 } }} elevation={2}>
-      <Box component="section" className="fixture-meta" sx={{ mb: 1 }}>
-        <Typography>
-          <b>{fixture.event}</b>
-        </Typography>
-        <Typography>{format(date, 'EEEE, MMMM d, yyyy')}</Typography>
-        <Typography>{format(date, 'HH:mm OOOO')}</Typography>
+    <Paper
+      sx={{
+        bgcolor: featured ? 'primary.main' : 'background.paper',
+        p: 2,
+        color: featured ? 'primary.contrastText' : 'text.black',
+        ':not(:last-child)': { mb: 1 },
+      }}
+      elevation={2}
+      component="article"
+    >
+      <Box
+        component="section"
+        className="fixture-metadata"
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          mb: 0.8,
+        }}
+      >
+        <Typography sx={{ textTransform: 'uppercase' }}>{event}</Typography>
+        <Typography>{format(date, 'd')}</Typography>
       </Box>
 
-      <Box component="section" className="fixture-teams">
-        <Typography>Home: {fixture.homeTeam}</Typography>
-        <Typography>Away: {fixture.awayTeam}</Typography>
+      <Box
+        component="section"
+        className="fixture-teams"
+        sx={{
+          mb: 0.8,
+          py: 1,
+          borderTop: '1px solid',
+          borderBottom: '1px solid',
+          borderColor: featured ? 'primary.contrastText' : 'common.black',
+        }}
+      >
+        <FixtureCardTeamName>{homeTeam}</FixtureCardTeamName>
+        <FixtureCardTeamName>{awayTeam}</FixtureCardTeamName>
       </Box>
 
-      {buyButton && (
+      {buyButton ? (
         <Button
-          variant="contained"
+          component={Link}
+          to={checkoutUrl}
+          variant="text"
           color="primary"
-          sx={{ display: 'block', mt: 1 }}
-          onClick={handleBuyButton}
+          sx={{
+            display: 'inline',
+            p: 0,
+            fontSize: 'body1.fontSize',
+            color: featured ? 'primary.contrastText' : 'primary.main',
+          }}
         >
-          Buy
+          Buy Ticket
+        </Button>
+      ) : (
+        <Button
+          variant="text"
+          color="primary"
+          sx={{
+            p: 0,
+            fontSize: 'body1.fontSize',
+            color: featured ? 'primary.contrastText' : 'primary.main',
+          }}
+        >
+          Details
         </Button>
       )}
     </Paper>

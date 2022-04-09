@@ -6,8 +6,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
 import { useGetFixtureListQuery } from '../store/fixture/service.js';
+import PageTitleBanner from '../components/PageTitleBanner.jsx';
 import FixtureCard from '../components/FixtureCard.jsx';
 import withSearchParams from '../components/withSearchParams.jsx';
+import { sortFixturesByMonth } from '../utilities/helpers.js';
 
 const LoadMoreButton = function LoadMoreButtonComponent({
   fixtures,
@@ -18,23 +20,25 @@ const LoadMoreButton = function LoadMoreButtonComponent({
   // Choose load more button text based on a few conditions.
   let loadMoreText = '';
 
-  if (isLoading || isFetching) loadMoreText = 'Loading';
+  if (isLoading || isFetching) loadMoreText = '';
   else if (fixtures.length === fixtures.total) loadMoreText = 'No More Data';
   else loadMoreText = 'Load More';
 
   return (
-    <Button
-      variant="contained"
-      onClick={handleLoadMore}
-      disabled={isLoading || isFetching || fixtures.length === fixtures.total}
-      sx={{ color: 'primary.contrastText' }}
-      className="fixtures__load-more-btn"
-    >
-      {isFetching && (
-        <CircularProgress color="inherit" size="20px" sx={{ mr: 0.5 }} />
-      )}
-      {loadMoreText}
-    </Button>
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Button
+        variant="contained"
+        onClick={handleLoadMore}
+        disabled={isLoading || isFetching || fixtures.length === fixtures.total}
+        sx={{ color: 'primary.contrastText' }}
+        className="fixtures__load-more-btn"
+      >
+        {isFetching && (
+          <CircularProgress color="inherit" size="20px" sx={{ mr: 0.5 }} />
+        )}
+        {loadMoreText}
+      </Button>
+    </Box>
   );
 };
 
@@ -66,9 +70,31 @@ const FixtureList = function FixtureListComponent({
 
   /* ========== Utilities ========== */
 
-  const fixtureCards = fixtures?.data.map((fixture) => (
-    <FixtureCard key={fixture._id} fixture={fixture} />
-  ));
+  const fixturesByMonth = sortFixturesByMonth(fixtures);
+
+  const fixtureList =
+    fixturesByMonth &&
+    Object.entries(fixturesByMonth).map(([monthYearString, fixtureArray]) => {
+      const fixtureCards = fixtureArray.map((fixture) => (
+        <FixtureCard key={fixture._id} fixture={fixture} />
+      ));
+
+      return (
+        <Box
+          key={monthYearString}
+          className={`fixtures__list-month fixtures__list-month--${monthYearString
+            .toLowerCase()
+            .replace(' ', '-')}`}
+          sx={{ ':not(:last-child)': { mb: 4 } }}
+        >
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            {monthYearString}
+          </Typography>
+
+          <Box>{fixtureCards}</Box>
+        </Box>
+      );
+    });
 
   /* ========== Render ========== */
 
@@ -77,26 +103,22 @@ const FixtureList = function FixtureListComponent({
   }
 
   return (
-    <Container>
-      <Typography
-        variant="h4"
-        sx={{ mb: 1, textAlign: 'center' }}
-        className="fixtures__title"
-      >
-        Fixtures List
-      </Typography>
+    <>
+      <PageTitleBanner title="Fixtures" />
 
-      <Box component="section" sx={{ mb: 3 }} className="fixtures__list">
-        {fixtureCards}
-      </Box>
+      <Container>
+        <Box component="section" sx={{ mb: 4 }} className="fixtures__list">
+          {fixtureList}
+        </Box>
 
-      <LoadMoreButton
-        fixtures={fixtures}
-        isLoading={isLoading}
-        isFetching={isFetching}
-        handleLoadMore={handleLoadMore}
-      />
-    </Container>
+        <LoadMoreButton
+          fixtures={fixtures}
+          isLoading={isLoading}
+          isFetching={isFetching}
+          handleLoadMore={handleLoadMore}
+        />
+      </Container>
+    </>
   );
 };
 
