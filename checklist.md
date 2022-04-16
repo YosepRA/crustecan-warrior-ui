@@ -48,3 +48,9 @@ Random thoughts and concerns while on development. Finished items will have ✅ 
 - Design inconsistencies of ticket card between `TicketSearch` and `Dashboard`.
 - Refactor `Header` component for its styled components and smaller components.
 - Delete 'LogoDemo' component from styled components folder once you have your logo SVG ready.
+- Home page `honors` to possible be moved to server as data.
+- Login and Register title box to use border radius according to theme.
+- Demo styeld components cleanup.
+- Back to top button:
+  - It's behind membership section's black overlay.
+  - It's above the footer.

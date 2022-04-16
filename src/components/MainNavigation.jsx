@@ -53,7 +53,7 @@ const Header = function HeaderComponent({ scrollTrigger }) {
             <Box
               sx={{
                 flex: '100%',
-                height: '16px',
+                height: 16,
                 mx: -2,
                 bgcolor: 'primary.main',
               }}

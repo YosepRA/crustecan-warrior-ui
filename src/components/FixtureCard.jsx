@@ -15,6 +15,7 @@ const FixtureCard = function FixtureCardComponent({
 }) {
   const { _id, event, date, homeTeam, awayTeam } = fixture;
   const checkoutUrl = `/ticket/checkout/${_id}`;
+  const dateFormat = featured ? 'MM/dd/yyyy' : 'd';
 
   return (
     <Paper
@@ -37,7 +38,7 @@ const FixtureCard = function FixtureCardComponent({
         }}
       >
         <Typography sx={{ textTransform: 'uppercase' }}>{event}</Typography>
-        <Typography>{format(date, 'd')}</Typography>
+        <Typography>{format(date, dateFormat)}</Typography>
       </Box>
 
       <Box

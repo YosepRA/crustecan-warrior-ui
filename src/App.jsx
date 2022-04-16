@@ -8,7 +8,15 @@ import {
   Navigate,
 } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faTrophy } from '@fortawesome/free-solid-svg-icons';
+import {
+  faFacebook,
+  faInstagram,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons';
 
 import Layout from './components/Layout.jsx';
 import RequireAuth from './components/RequireAuth.jsx';
@@ -25,67 +33,13 @@ import Overview from './components/dashboard/Overview.jsx';
 import TicketList from './components/dashboard/TicketList.jsx';
 import TransactionList from './components/dashboard/TransactionList.jsx';
 import { getLoginSessionThunk } from './store/user/slice.js';
+import theme from './components/mui-theme.js';
 
 import '@fontsource/roboto';
-import '@fontsource/oswald/400.css';
+import '@fontsource/oswald';
 
-// const theme = createTheme({
-//   palette: {
-//     common: {
-//       black: 'rgba(0, 0, 0, 0.87)',
-//     },
-//     neutral: {
-//       main: 'rgba(0, 0, 0, 0.87)',
-//       contrastText: '#fff',
-//     },
-//   },
-// });
-
-const systemFonts = [
-  '-apple-system',
-  'BlinkMacSystemFont',
-  '"Segoe UI"',
-  'Roboto',
-  '"Helvetica Neue"',
-  'Arial',
-  'sans-serif',
-  '"Apple Color Emoji"',
-  '"Segoe UI Emoji"',
-  '"Segoe UI Symbol"',
-];
-const theme = createTheme({
-  palette: {
-    common: {
-      black: 'rgba(0, 0, 0, 0.87)',
-    },
-    primary: {
-      main: '#D00000',
-    },
-  },
-  shape: {
-    borderRadius: '10px',
-  },
-  typography: {
-    h1: {
-      fontFamily: ['Oswald'].concat(systemFonts).join(','),
-    },
-    h2: {
-      fontFamily: ['Oswald'].concat(systemFonts).join(','),
-    },
-    h3: {
-      fontFamily: ['Oswald'].concat(systemFonts).join(','),
-    },
-    h4: {
-      fontFamily: ['Oswald'].concat(systemFonts).join(','),
-    },
-    h5: {
-      fontFamily: ['Oswald'].concat(systemFonts).join(','),
-    },
-    h6: {
-      fontFamily: ['Oswald'].concat(systemFonts).join(','),
-    },
-  },
-});
+// FontAwesome library.
+library.add(faTrophy, faFacebook, faInstagram, faTwitter);
 
 const App = function AppComponent() {
   const dispatch = useDispatch();
@@ -96,6 +50,8 @@ const App = function AppComponent() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
+
       <Box className="App">
         <Router>
           <Routes>

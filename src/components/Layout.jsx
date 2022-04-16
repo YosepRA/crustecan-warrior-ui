@@ -3,11 +3,12 @@ import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import Zoom from '@mui/material/Zoom';
+import Tooltip from '@mui/material/Tooltip';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import MainNavigation from './MainNavigation.jsx';
-// import Footer from './Footer.jsx';
+import Footer from './Footer.jsx';
 
 const Layout = function LayoutComponent() {
   const scrollTrigger = useScrollTrigger();
@@ -20,21 +21,40 @@ const Layout = function LayoutComponent() {
     <>
       <MainNavigation scrollTrigger={scrollTrigger} />
 
-      <Box component="main" sx={{ mt: '80px', pb: '5rem' }} className="content">
+      <Box
+        component="main"
+        className="content"
+        sx={{
+          // 100 vh minus content section's margin top, minus footer height, minus ~
+          // ~ content section's margin bottom.
+          minHeight: (theme) =>
+            `calc(100vh - 80px - 100px - ${theme.spacing(8)})`,
+          mt: '80px',
+          mb: 8,
+        }}
+      >
         <Outlet />
       </Box>
 
-      {/* <Footer /> */}
+      <Footer />
 
       <Zoom in={scrollTrigger}>
-        <Fab
-          size="small"
-          color="primary"
-          onClick={handleClick}
-          sx={{ position: 'fixed', bottom: 20, right: 20 }}
-        >
-          <KeyboardArrowUpIcon />
-        </Fab>
+        <Tooltip title="Back to top" placement="left">
+          <Fab
+            size="small"
+            color="primary"
+            onClick={handleClick}
+            sx={{
+              position: 'fixed',
+              bottom: 40,
+              right: 20,
+              zIndex: 1050,
+            }}
+            aria-label="Back to top"
+          >
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </Tooltip>
       </Zoom>
     </>
   );
