@@ -11,6 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import { logoutThunk } from '../store/user/slice.js';
 import DemoLogo from './styled/DemoLogo.jsx';
+import Backdrop from './styled/Backdrop.jsx';
 import MainNavigationMenuMobile from './MainNavigationMenuMobile.jsx';
 import MainNavigationMenuDesktop from './MainNavigationMenuDesktop.jsx';
 
@@ -36,6 +37,10 @@ const Header = function HeaderComponent({ scrollTrigger }) {
   }, []);
 
   const handleOpen = (state) => {
+    // Disable document body scroll on mobile menu open.
+    const bodyScroll = state ? 'hidden' : 'auto';
+    document.body.style.overflow = bodyScroll;
+
     setOpen(state);
   };
 
@@ -46,21 +51,25 @@ const Header = function HeaderComponent({ scrollTrigger }) {
   };
 
   return (
-    <Box component="nav">
+    <Box className="main-nav" component="nav">
       <Slide appear={false} direction="down" in={!scrollTrigger}>
         <AppBar sx={{ bgcolor: 'common.white', color: 'text.primary' }}>
-          <Toolbar sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
-            <Box
-              sx={{
-                flex: '100%',
-                height: 16,
-                mx: -2,
-                bgcolor: 'primary.main',
-              }}
-            />
+          <Box
+            className="main-nav__accent"
+            sx={{
+              width: 1,
+              height: 16,
+              bgcolor: 'primary.main',
+            }}
+          />
 
-            <Link to="/">
-              <DemoLogo />
+          <Toolbar
+            sx={{
+              justifyContent: { xs: 'space-between', sm: 'center' },
+            }}
+          >
+            <Link className="main-nav__brand-link" to="/">
+              <DemoLogo className="main-nav__brand-icon" />
             </Link>
 
             <IconButton
@@ -85,7 +94,7 @@ const Header = function HeaderComponent({ scrollTrigger }) {
       <Slide
         direction="left"
         in={open}
-        timeout={400}
+        timeout={300}
         easing={{ enter: easing.easeOut, exit: easing.easeOut }}
         mountOnEnter
         unmountOnExit
@@ -96,6 +105,8 @@ const Header = function HeaderComponent({ scrollTrigger }) {
           handleLogout={handleLogout}
         />
       </Slide>
+
+      <Backdrop open={open} />
     </Box>
   );
 };

@@ -28,6 +28,7 @@ const socialMedia = [
 const Footer = function FooterComponent() {
   const socialMediaLinks = socialMedia.map(({ name, url, icon }) => (
     <IconButton
+      key={name}
       className="page-footer__social-media"
       aria-label={name.toLowerCase()}
       component={Link}
@@ -46,8 +47,8 @@ const Footer = function FooterComponent() {
       sx={{
         position: 'relative',
         zIndex: 'appBar',
-        pt: 3,
-        bgcolor: grey[200],
+        bgcolor: 'common.white',
+        boxShadow: '-1px -2px 10px 0px rgba(66, 66, 66, 0.2)',
         '.page-footer': {
           '&__social-media:last-child': {
             pr: 0,
@@ -61,25 +62,22 @@ const Footer = function FooterComponent() {
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
+          py: 3,
         }}
       >
-        <Typography variant="h5" className="page-footer__brand" sx={{ mb: 3 }}>
+        <Typography variant="h5" className="page-footer__brand">
           Crustecan Warrior
         </Typography>
 
-        <Box
-          component="section"
-          className="page-footer__social-media"
-          sx={{ mb: 3 }}
-        >
+        <Box component="section" className="page-footer__social-media">
           {socialMediaLinks}
         </Box>
-
-        <Box
-          className="page-footer__accent"
-          sx={{ flex: '100%', height: 16, mx: -2, bgcolor: 'primary.main' }}
-        />
       </Container>
+
+      <Box
+        className="page-footer__accent"
+        sx={{ width: 1, height: 16, bgcolor: 'primary.main' }}
+      />
     </Box>
   );
 };

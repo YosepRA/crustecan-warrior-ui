@@ -8,7 +8,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const HonorCard = function HonorCardComponent({ honor }) {
   return (
-    <Grid item component="article" xs={12} className="honors__card">
+    <Grid
+      item
+      component="article"
+      xs={12}
+      sm={6}
+      md={4}
+      className="honors__card"
+    >
       <Paper
         sx={{
           display: 'flex',

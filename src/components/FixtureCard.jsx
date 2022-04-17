@@ -7,6 +7,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
 import FixtureCardTeamName from './styled/FixtureCardTeamName.jsx';
+import { unavailableFeatureAlert } from '../utilities/helpers.js';
 
 const FixtureCard = function FixtureCardComponent({
   fixture,
@@ -15,11 +16,18 @@ const FixtureCard = function FixtureCardComponent({
 }) {
   const { _id, event, date, homeTeam, awayTeam } = fixture;
   const checkoutUrl = `/ticket/checkout/${_id}`;
-  const dateFormat = featured ? 'MM/dd/yyyy' : 'd';
+  const dateFormatMobile = featured ? 'MM/dd/yyyy' : 'd';
+  const dateFormatDesktop = 'EEEE, MMMM dd, yyyy';
+
+  const handleFixtureDetails = () => {
+    unavailableFeatureAlert('Fixture details');
+  };
 
   return (
     <Paper
       sx={{
+        maxWidth: { xs: 500, sm: 620 },
+        mx: 'auto',
         bgcolor: featured ? 'primary.main' : 'background.paper',
         p: 2,
         color: featured ? 'primary.contrastText' : 'text.black',
@@ -34,56 +42,79 @@ const FixtureCard = function FixtureCardComponent({
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          mb: 0.8,
+          mb: { xs: 0.8, sm: 1.2 },
         }}
       >
         <Typography sx={{ textTransform: 'uppercase' }}>{event}</Typography>
-        <Typography>{format(date, dateFormat)}</Typography>
+        <Typography sx={{ display: { sm: 'none' } }}>
+          {format(date, dateFormatMobile)}
+        </Typography>
+        <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>
+          {format(date, dateFormatDesktop)}
+        </Typography>
       </Box>
 
       <Box
         component="section"
         className="fixture-teams"
         sx={{
-          mb: 0.8,
-          py: 1,
+          display: { sm: 'flex' },
+          justifyContent: { sm: 'center' },
+          alignItems: { sm: 'center' },
+          mb: { xs: 0.8, sm: 1.2 },
+          py: { xs: 1, sm: 3 },
           borderTop: '1px solid',
           borderBottom: '1px solid',
           borderColor: featured ? 'primary.contrastText' : 'common.black',
+          fontSize: { xs: '1.2rem', sm: '1.3rem' },
         }}
       >
         <FixtureCardTeamName>{homeTeam}</FixtureCardTeamName>
+
+        <Typography
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+            mx: 1.5,
+            fontSize: 'inherit',
+          }}
+        >
+          VS
+        </Typography>
+
         <FixtureCardTeamName>{awayTeam}</FixtureCardTeamName>
       </Box>
 
-      {buyButton ? (
-        <Button
-          component={Link}
-          to={checkoutUrl}
-          variant="text"
-          color="primary"
-          sx={{
-            display: 'inline',
-            p: 0,
-            fontSize: 'body1.fontSize',
-            color: featured ? 'primary.contrastText' : 'primary.main',
-          }}
-        >
-          Buy Ticket
-        </Button>
-      ) : (
-        <Button
-          variant="text"
-          color="primary"
-          sx={{
-            p: 0,
-            fontSize: 'body1.fontSize',
-            color: featured ? 'primary.contrastText' : 'primary.main',
-          }}
-        >
-          Details
-        </Button>
-      )}
+      <Box sx={{ display: 'flex', justifyContent: { sm: 'flex-start' } }}>
+        {buyButton ? (
+          <Button
+            component={Link}
+            to={checkoutUrl}
+            variant="text"
+            color="primary"
+            sx={{
+              display: 'inline',
+              p: 0,
+              fontSize: 'body1.fontSize',
+              color: featured ? 'primary.contrastText' : 'primary.main',
+            }}
+          >
+            Buy Ticket
+          </Button>
+        ) : (
+          <Button
+            variant="text"
+            color="primary"
+            sx={{
+              p: 0,
+              fontSize: 'body1.fontSize',
+              color: featured ? 'primary.contrastText' : 'primary.main',
+            }}
+            onClick={handleFixtureDetails}
+          >
+            Details
+          </Button>
+        )}
+      </Box>
     </Paper>
   );
 };

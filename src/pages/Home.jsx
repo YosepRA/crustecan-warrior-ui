@@ -14,6 +14,7 @@ import HonorCard from '../components/HonorCard.jsx';
 import { useGetFixtureListQuery } from '../store/fixture/service.js';
 import bannerBg from '../assets/leah-hetteberg-b81O1CJmKqY-unsplash.jpg';
 import memberBg from '../assets/leah-hetteberg-0pSsWN8uqAE-unsplash.jpg';
+import { unavailableFeatureAlert } from '../utilities/helpers.js';
 
 const honors = [
   { name: 'Premier League', total: 2 },
@@ -31,7 +32,7 @@ const Home = function HomeComponent() {
   /* ========== Event handlers ========== */
 
   const handleMembership = () => {
-    alert('Membership feature is not available yet.');
+    unavailableFeatureAlert('Membership');
   };
 
   /* ========== Utilities ========== */
@@ -52,7 +53,10 @@ const Home = function HomeComponent() {
 
   return (
     <Container>
-      <SectionWrapper className="banner" sx={{ mt: -2, mx: -2 }}>
+      <SectionWrapper
+        className="banner"
+        sx={{ mt: -2, mx: { xs: -2, sm: -3 } }}
+      >
         <Box
           sx={{
             position: 'relative',
@@ -61,8 +65,9 @@ const Home = function HomeComponent() {
             justifyContent: 'center',
             alignItems: 'center',
             width: 1,
-            height: 240,
-            background: `fixed url(${bannerBg}) no-repeat top center/120%`,
+            height: { xs: 240, sm: 340 },
+            background: `fixed url(${bannerBg}) no-repeat top center/100%`,
+            backgroundSize: { sm: '110%' },
             ':after': {
               position: 'absolute',
               top: 0,

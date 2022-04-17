@@ -5,7 +5,6 @@ const MenuItemMobile = styled('p')(({ theme }) => ({
   padding: `0 ${theme.spacing(3)}`,
   fontFamily: theme.typography.h1.fontFamily,
   textAlign: 'center',
-  fontSize: '1.1rem',
   color: theme.palette.text.primary,
   ':not(:last-child)': {
     marginBottom: theme.spacing(2),

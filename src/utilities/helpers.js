@@ -27,4 +27,8 @@ function sortFixturesByMonth(fixtures) {
     }, {});
 }
 
-export { promiseResolver, sortFixturesByMonth };
+function unavailableFeatureAlert(name) {
+  alert(`${name} is not available yet.`);
+}
+
+export { promiseResolver, sortFixturesByMonth, unavailableFeatureAlert };

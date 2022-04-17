@@ -27,9 +27,11 @@ const Layout = function LayoutComponent() {
         sx={{
           // 100 vh minus content section's margin top, minus footer height, minus ~
           // ~ content section's margin bottom.
-          minHeight: (theme) =>
-            `calc(100vh - 80px - 100px - ${theme.spacing(8)})`,
-          mt: '80px',
+          minHeight: (theme) => ({
+            xs: `calc(100vh - 80px - 100px - ${theme.spacing(8)})`,
+            sm: `calc(100vh - 137px - 100px - ${theme.spacing(8)})`,
+          }),
+          mt: { xs: '80px', sm: '137px' },
           mb: 8,
         }}
       >

@@ -27,6 +27,7 @@ Random thoughts and concerns while on development. Finished items will have ✅ 
   - Scoresheet.
   - Highlight using text. Imagine Google sport timeline.
 - Checkout to have its own navigation bar. To minimize distraction while checking out, remove any unnecessary elements. Imagine this navbar to have that "back button" that will direct user back to "buy ticket" page. Again, it shouldn't be fancy at all. Minimize distraction is the goal.
+- Unavailable feature alert window. Use a custom alert window than using browser alert.
 
 ## Fixes/Refactors
 
@@ -54,3 +55,4 @@ Random thoughts and concerns while on development. Finished items will have ✅ 
 - Back to top button:
   - It's behind membership section's black overlay.
   - It's above the footer.
+- Dynamic `Backdrop.jsx` z-index.

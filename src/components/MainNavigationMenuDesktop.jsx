@@ -22,7 +22,7 @@ const MainNavigationMenuDesktop = function MainNavigationMenuDesktopComponent({
         justifyContent: { sm: 'center' },
         p: 1,
         bgcolor: 'white',
-        borderBottom: 1,
+        borderTop: 1,
       }}
     >
       {menuItems}
