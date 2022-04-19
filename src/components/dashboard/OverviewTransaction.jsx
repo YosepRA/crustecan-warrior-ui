@@ -2,6 +2,7 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 
 import { useGetTransactionListQuery } from '../../store/dashboard/service.js';
@@ -33,11 +34,13 @@ const OverviewTransaction = function OverviewTransactionComponent() {
         Latest Transactions
       </Typography>
 
-      <Box className="overview__list" sx={{ mb: 2 }}>
+      <Grid container spacing={2} className="overview__list" sx={{ mb: 2 }}>
         {transactions.map((transaction) => (
-          <TransactionCard key={transaction._id} transaction={transaction} />
+          <Grid item xs={12} md={6} key={transaction._id}>
+            <TransactionCard transaction={transaction} />
+          </Grid>
         ))}
-      </Box>
+      </Grid>
 
       <Box className="overview__action">
         <Link component={RouterLink} to="../transaction">

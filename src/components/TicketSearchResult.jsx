@@ -17,7 +17,12 @@ const TicketSearchResult = function TicketSearchResultComponent({
   if (!ticket || !hasSubmitted) {
     return (
       <Box component="section">
-        <Typography variant="h5" component="h2" color="textSecondary">
+        <Typography
+          variant="h5"
+          component="h2"
+          color="textSecondary"
+          sx={{ textAlign: 'center' }}
+        >
           Enter your ticket ID using search box above.
         </Typography>
       </Box>

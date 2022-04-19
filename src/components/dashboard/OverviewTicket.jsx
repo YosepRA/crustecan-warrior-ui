@@ -2,6 +2,7 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 
 import { useGetTicketListQuery } from '../../store/dashboard/service.js';
@@ -33,11 +34,13 @@ const OverviewTicket = function OverviewTicketComponent() {
         Latest Tickets
       </Typography>
 
-      <Box className="overview__list" sx={{ mb: 2 }}>
+      <Grid container className="overview__list" spacing={2} sx={{ mb: 2 }}>
         {tickets.map((ticket) => (
-          <TicketCard key={ticket._id} ticket={ticket} showDownloadBtn />
+          <Grid item xs={12} md={6} key={ticket._id}>
+            <TicketCard ticket={ticket} showDownloadBtn />
+          </Grid>
         ))}
-      </Box>
+      </Grid>
 
       <Box className="overview__action">
         <Link component={RouterLink} to="../ticket">

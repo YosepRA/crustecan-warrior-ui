@@ -52,7 +52,11 @@ const TransactionCard = function TransactionCardComponent({ transaction }) {
     <Paper
       component="article"
       className="transaction"
-      sx={{ p: 2, ':not(:last-child)': { mb: 1 } }}
+      sx={{
+        maxWidth: { xs: 520, md: 'none' },
+        p: 2,
+        ':not(:last-child)': { mb: 1 },
+      }}
     >
       <Box
         className="transaction__metadata"
@@ -60,7 +64,6 @@ const TransactionCard = function TransactionCardComponent({ transaction }) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          mb: 1,
           py: 1,
         }}
       >
@@ -69,12 +72,10 @@ const TransactionCard = function TransactionCardComponent({ transaction }) {
       </Box>
 
       <Box className="transaction__fixture" sx={{ mb: 3 }}>
-        <Box className="transaction__event" sx={{ mb: 1 }}>
-          <Typography>{event}</Typography>
-        </Box>
-
-        <Box className="transaction__date" sx={{ mb: 1 }}>
-          <Typography>{fixtureDateString}</Typography>
+        <Box className="transaction__event-date" sx={{ mb: 1 }}>
+          <Typography>
+            {event} - {fixtureDateString}
+          </Typography>
         </Box>
 
         <Box

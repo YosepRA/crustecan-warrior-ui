@@ -16,8 +16,8 @@ const FixtureCard = function FixtureCardComponent({
 }) {
   const { _id, event, date, homeTeam, awayTeam } = fixture;
   const checkoutUrl = `/ticket/checkout/${_id}`;
-  const dateFormatMobile = featured ? 'MM/dd/yyyy' : 'd';
-  const dateFormatDesktop = 'EEEE, MMMM dd, yyyy';
+  const dateStringMobile = featured ? 'MM/dd/yyyy' : 'd';
+  const dateStringDesktop = 'EEEE, MMMM dd, yyyy';
 
   const handleFixtureDetails = () => {
     unavailableFeatureAlert('Fixture details');
@@ -47,10 +47,10 @@ const FixtureCard = function FixtureCardComponent({
       >
         <Typography sx={{ textTransform: 'uppercase' }}>{event}</Typography>
         <Typography sx={{ display: { sm: 'none' } }}>
-          {format(date, dateFormatMobile)}
+          {format(date, dateStringMobile)}
         </Typography>
         <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>
-          {format(date, dateFormatDesktop)}
+          {format(date, dateStringDesktop)}
         </Typography>
       </Box>
 
@@ -66,7 +66,7 @@ const FixtureCard = function FixtureCardComponent({
           borderTop: '1px solid',
           borderBottom: '1px solid',
           borderColor: featured ? 'primary.contrastText' : 'common.black',
-          fontSize: { xs: '1.2rem', sm: '1.3rem' },
+          fontSize: '1.2rem',
         }}
       >
         <FixtureCardTeamName>{homeTeam}</FixtureCardTeamName>

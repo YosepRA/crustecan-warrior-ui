@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 // import SearchIcon from '@mui/icons-material/Search';
 
+import PageTitleBanner from '../components/PageTitleBanner.jsx';
 import TicketSearchResult from '../components/TicketSearchResult.jsx';
 import { useLazyGetTicketDetailsQuery } from '../store/ticket/service.js';
 
@@ -26,44 +27,48 @@ const TicketSearch = function TicketSearchComponent() {
   };
 
   return (
-    <Container>
-      <Box component="section">
-        <Box
-          component="form"
-          noValidate
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            mb: 3,
-            py: 5,
-          }}
-          onSubmit={handleSubmit}
-        >
-          <TextField
-            name="fixtureId"
-            label="Search using fixture ID"
-            value={ticketId}
-            onChange={handleChange}
-            autoFocus
-          />
+    <>
+      <PageTitleBanner title="Search Ticket" />
 
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            sx={{ display: 'inline-block', ml: 1 }}
+      <Container sx={{ minHeight: 460, maxWidth: { sm: 668 } }}>
+        <Box component="section">
+          <Box
+            component="form"
+            noValidate
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              mb: 3,
+              py: 2,
+            }}
+            onSubmit={handleSubmit}
           >
-            Search
-          </Button>
-        </Box>
-      </Box>
+            <TextField
+              name="fixtureId"
+              label="Search using fixture ID"
+              value={ticketId}
+              onChange={handleChange}
+              autoFocus
+            />
 
-      <TicketSearchResult
-        ticket={ticket}
-        isLoading={isLoading}
-        hasSubmitted={hasSubmitted}
-      />
-    </Container>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              sx={{ display: 'inline-block', ml: 1 }}
+            >
+              Search
+            </Button>
+          </Box>
+        </Box>
+
+        <TicketSearchResult
+          ticket={ticket}
+          isLoading={isLoading}
+          hasSubmitted={hasSubmitted}
+        />
+      </Container>
+    </>
   );
 };
 

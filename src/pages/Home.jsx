@@ -68,6 +68,10 @@ const Home = function HomeComponent() {
             height: { xs: 240, sm: 340 },
             background: `fixed url(${bannerBg}) no-repeat top center/100%`,
             backgroundSize: { sm: '110%' },
+            backgroundPosition: {
+              md: 'top 60% left 50%',
+              lg: 'top 30% left 50%',
+            },
             ':after': {
               position: 'absolute',
               top: 0,
@@ -122,7 +126,7 @@ const Home = function HomeComponent() {
       <SectionWrapper className="honors">
         <SectionTitle variant="h4">Our Honors</SectionTitle>
 
-        <Grid container spacing={2}>
+        <Grid container spacing={{ xs: 2, sm: 0 }}>
           {honorCards}
         </Grid>
       </SectionWrapper>

@@ -38,7 +38,7 @@ const MainNavigationMenuMobile = function MainNavigationMenuMobileComponent(
           right: 0,
           zIndex: 'drawer',
           width: 1,
-          maxWidth: 360,
+          maxWidth: 375,
           height: 1,
           bgcolor: 'common.white',
           color: 'text.primary',

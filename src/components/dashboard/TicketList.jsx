@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 
@@ -32,11 +33,19 @@ const TicketList = function TicketListComponent({ search }) {
 
   return (
     <Box component="section" className="ticket-list">
-      <Box className="ticket-list__list" sx={{ mb: 5 }}>
+      <Grid
+        container
+        spacing={2}
+        justifyContent="space-between"
+        className="ticket-list__list"
+        sx={{ mb: 5 }}
+      >
         {tickets.map((ticket) => (
-          <TicketCard key={ticket._id} ticket={ticket} showDownloadBtn />
+          <Grid item xs={12} md={6} key={ticket._id}>
+            <TicketCard ticket={ticket} showDownloadBtn />
+          </Grid>
         ))}
-      </Box>
+      </Grid>
 
       <Pagination
         page={search.page}

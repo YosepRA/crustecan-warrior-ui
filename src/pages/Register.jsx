@@ -78,7 +78,7 @@ const Register = function LoginComponent() {
   /* ========== Render. ========== */
 
   return (
-    <Container>
+    <Container sx={{ py: 4 }}>
       <UserPromptWrapper elevation={2}>
         <UserPromptHeader className="login__header">
           <Typography

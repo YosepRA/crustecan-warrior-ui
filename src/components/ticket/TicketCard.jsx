@@ -5,6 +5,7 @@ import JsBarcode from 'jsbarcode';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import DownloadIcon from '@mui/icons-material/Download';
 
@@ -25,6 +26,7 @@ const TicketCard = function TicketCardComponent({ ticket, showDownloadBtn }) {
 
   const handleDownload = ({
     _id: ticketIdDownload,
+    seat: { section, seatNumber },
     fixture: {
       date: dateDownload,
       homeTeam: homeTeamDownload,
@@ -34,7 +36,7 @@ const TicketCard = function TicketCardComponent({ ticket, showDownloadBtn }) {
     const doc = new JsPDF({ format: [50, 143], orientation: 'landscape' });
     const fileDateString = format(new Date(dateDownload), 'yyyy-MM-dd');
     const fileName =
-      `${fileDateString}-${homeTeamDownload}-vs-${awayTeamDownload}-ticket`
+      `${fileDateString}-${homeTeamDownload}-vs-${awayTeamDownload}-${section}-${seatNumber}-ticket`
         .toLowerCase()
         .replaceAll(' ', '-');
     const barcode = createBarcode(ticketIdDownload);
@@ -43,7 +45,8 @@ const TicketCard = function TicketCardComponent({ ticket, showDownloadBtn }) {
     doc.text('Hey there!', 10, 10);
     doc.text(`This is the ticket ID: ${ticketIdDownload}`, 10, 15);
     doc.text(`${homeTeamDownload} vs ${awayTeamDownload}`, 10, 20);
-    doc.addImage(barcode, 'PNG', 10, 25, 50, 15);
+    doc.text(`Seat: ${section}-${seatNumber}`, 10, 25);
+    doc.addImage(barcode, 'PNG', 10, 30, 50, 15);
     doc.save(fileName);
   };
 
@@ -51,18 +54,28 @@ const TicketCard = function TicketCardComponent({ ticket, showDownloadBtn }) {
     <Paper
       component="article"
       className="ticket"
-      sx={{ p: 2, ':not(:last-child)': { mb: 1 } }}
+      sx={{
+        maxWidth: { xs: 520, md: 'none' },
+        p: 2,
+        ':not(:last-child)': { mb: 1 },
+      }}
     >
       <Box className="ticket__fixture">
-        <Typography className="ticket__event" sx={{ mb: 1 }}>
-          {event}
-        </Typography>
+        <Stack
+          className="ticket__metadata"
+          direction="row"
+          justifyContent="space-between"
+        >
+          <Typography className="ticket__event" sx={{ mb: 1 }}>
+            {event}
+          </Typography>
 
-        <Typography className="ticket__date" sx={{ mb: 1 }}>
-          {dateString}
-        </Typography>
+          <Typography className="ticket__date" sx={{ mb: 1 }}>
+            {dateString}
+          </Typography>
+        </Stack>
 
-        <Box className="ticket__main-info" sx={{ py: 3, textAlign: 'center' }}>
+        <Box className="ticket__main-info" sx={{ py: 2, textAlign: 'center' }}>
           <Typography
             className="ticket__teams"
             sx={{ mb: 1, fontSize: '1.1rem' }}

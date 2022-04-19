@@ -20,7 +20,7 @@ const LoadMoreButton = function LoadMoreButtonComponent({
   // Choose load more button text based on a few conditions.
   let loadMoreText = '';
 
-  if (isLoading || isFetching) loadMoreText = '';
+  if (isLoading || isFetching) loadMoreText = 'Loading';
   else if (fixtures.length === fixtures.total) loadMoreText = 'No More Data';
   else loadMoreText = 'Load More';
 
@@ -98,26 +98,26 @@ const FixtureList = function FixtureListComponent({
 
   /* ========== Render ========== */
 
-  if (isLoading) {
-    return <Typography variant="h3">Loading</Typography>;
-  }
-
   return (
     <>
       <PageTitleBanner title="Fixtures" />
 
-      <Container>
-        <Box component="section" sx={{ mb: 4 }} className="fixtures__list">
-          {fixtureList}
-        </Box>
+      {isLoading ? (
+        <CircularProgress sx={{ display: 'block', mx: 'auto', my: 2 }} />
+      ) : (
+        <Container sx={{ maxWidth: { sm: 668 } }}>
+          <Box component="section" sx={{ mb: 4 }} className="fixtures__list">
+            {fixtureList}
+          </Box>
 
-        <LoadMoreButton
-          fixtures={fixtures}
-          isLoading={isLoading}
-          isFetching={isFetching}
-          handleLoadMore={handleLoadMore}
-        />
-      </Container>
+          <LoadMoreButton
+            fixtures={fixtures}
+            isLoading={isLoading}
+            isFetching={isFetching}
+            handleLoadMore={handleLoadMore}
+          />
+        </Container>
+      )}
     </>
   );
 };

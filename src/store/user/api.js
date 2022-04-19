@@ -21,12 +21,12 @@ async function login(payload) {
 }
 
 async function register(payload) {
-  const [response, loginError] = await promiseResolver(
+  const [response, registerError] = await promiseResolver(
     axios.post(`${VITE_API_ENDPOINT}/user/register`, payload),
   );
 
-  if (loginError) {
-    throw loginError;
+  if (registerError) {
+    throw registerError;
   } else if (response.data.success === false) {
     throw new Error(response.data.message);
   }

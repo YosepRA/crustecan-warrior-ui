@@ -5,6 +5,7 @@ import Container from '@mui/material/Container';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import TicketCheckoutStepper from '../components/TicketCheckoutStepper.jsx';
+import TicketCheckoutFixtureInfo from '../components/TicketCheckoutFixtureInfo.jsx';
 import TicketCheckoutSeat from '../components/TicketCheckoutSeat.jsx';
 import TicketCheckoutPayment from '../components/TicketCheckoutPayment.jsx';
 import { useGetFixtureDetailsQuery } from '../store/fixture/service.js';
@@ -25,32 +26,36 @@ const TicketCheckout = function TicketCheckoutComponent() {
     useGetFixtureDetailsQuery(queryArguments);
 
   return (
-    <Container>
+    <Container sx={{ maxWidth: { sm: 668 }, pt: 1 }} className="checkout">
       <TicketCheckoutStepper />
 
       {isLoading ? (
         <CircularProgress sx={{ display: 'block', mx: 'auto', my: 2 }} />
       ) : (
-        <Formik initialValues={initialValues}>
-          {(formikProps) => (
-            <Routes>
-              <Route
-                path="seat-selection"
-                element={
-                  <TicketCheckoutSeat
-                    fixture={fixture.data}
-                    formikProps={formikProps}
-                  />
-                }
-              />
-              <Route
-                path="payment"
-                element={<TicketCheckoutPayment formikProps={formikProps} />}
-              />
-              <Route path="*" element={<Navigate to="seat-selection" />} />
-            </Routes>
-          )}
-        </Formik>
+        <>
+          <TicketCheckoutFixtureInfo fixture={fixture.data} />
+
+          <Formik initialValues={initialValues}>
+            {(formikProps) => (
+              <Routes>
+                <Route
+                  path="seat-selection"
+                  element={
+                    <TicketCheckoutSeat
+                      fixture={fixture.data}
+                      formikProps={formikProps}
+                    />
+                  }
+                />
+                <Route
+                  path="payment"
+                  element={<TicketCheckoutPayment formikProps={formikProps} />}
+                />
+                <Route path="*" element={<Navigate to="seat-selection" />} />
+              </Routes>
+            )}
+          </Formik>
+        </>
       )}
     </Container>
   );

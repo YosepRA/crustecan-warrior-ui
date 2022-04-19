@@ -146,7 +146,7 @@ const TicketCheckoutPayment = function TicketCheckoutPaymentComponent({
         <Button
           type="button"
           variant="outlined"
-          color="neutral"
+          color="primary"
           size="large"
           onClick={handleGoBack}
           disabled={loading}

@@ -23,7 +23,7 @@ const theme = createTheme({
     },
   },
   shape: {
-    borderRadius: '10px',
+    borderRadius: 10,
   },
   typography: {
     h1: {

@@ -20,23 +20,25 @@ const LoadMoreButton = function LoadMoreButtonComponent({
   // Choose load more button text based on a few conditions.
   let loadMoreText = '';
 
-  if (isLoading || isFetching) loadMoreText = '';
+  if (isLoading || isFetching) loadMoreText = 'Loading';
   else if (fixtures.length === fixtures.total) loadMoreText = 'No More Data';
   else loadMoreText = 'Load More';
 
   return (
-    <Button
-      variant="contained"
-      onClick={handleLoadMore}
-      disabled={isLoading || isFetching || fixtures.length === fixtures.total}
-      sx={{ color: 'primary.contrastText' }}
-      className="fixtures__load-more-btn"
-    >
-      {isFetching && (
-        <CircularProgress color="inherit" size="20px" sx={{ mr: 0.5 }} />
-      )}
-      {loadMoreText}
-    </Button>
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Button
+        variant="contained"
+        onClick={handleLoadMore}
+        disabled={isLoading || isFetching || fixtures.length === fixtures.total}
+        sx={{ color: 'primary.contrastText' }}
+        className="fixtures__load-more-btn"
+      >
+        {isFetching && (
+          <CircularProgress color="inherit" size="20px" sx={{ mr: 0.5 }} />
+        )}
+        {loadMoreText}
+      </Button>
+    </Box>
   );
 };
 
@@ -96,29 +98,30 @@ const TicketFixtureList = function TicketFixtureListComponent({
 
   /* ========== Render ========== */
 
-  if (isLoading) {
-    return <Typography variant="h3">Loading</Typography>;
-  }
-
   return (
     <>
       <PageTitleBanner title="Buy Ticket" />
 
-      <Container>
-        <Box
-          component="section"
-          sx={{ mb: 3 }}
-          className="ticket-fixture__list"
-        >
-          {fixtureList}
-        </Box>
-        <LoadMoreButton
-          fixtures={fixtures}
-          isLoading={isLoading}
-          isFetching={isFetching}
-          handleLoadMore={handleLoadMore}
-        />
-      </Container>
+      {isLoading ? (
+        <CircularProgress sx={{ display: 'block', mx: 'auto', my: 2 }} />
+      ) : (
+        <Container sx={{ maxWidth: { sm: 668 } }}>
+          <Box
+            component="section"
+            sx={{ mb: 4 }}
+            className="ticket-fixture__list"
+          >
+            {fixtureList}
+          </Box>
+
+          <LoadMoreButton
+            fixtures={fixtures}
+            isLoading={isLoading}
+            isFetching={isFetching}
+            handleLoadMore={handleLoadMore}
+          />
+        </Container>
+      )}
     </>
   );
 };

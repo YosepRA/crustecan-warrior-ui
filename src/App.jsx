@@ -20,6 +20,7 @@ import {
 
 import Layout from './components/Layout.jsx';
 import RequireAuth from './components/RequireAuth.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
 import Home from './pages/Home.jsx';
 import FixtureList from './pages/FixtureList.jsx';
 import TicketFixtureList from './pages/TicketFixtureList.jsx';
@@ -54,6 +55,8 @@ const App = function AppComponent() {
 
       <Box className="App">
         <Router>
+          <ScrollToTop />
+
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
@@ -69,6 +72,7 @@ const App = function AppComponent() {
                   />
                 }
               />
+
               <Route path="ticket">
                 <Route
                   path="fixtures"
@@ -85,13 +89,18 @@ const App = function AppComponent() {
                 <Route path="search" element={<TicketSearch />} />
                 <Route
                   path="checkout/:fixtureId/*"
-                  element={<TicketCheckout />}
+                  element={
+                    <RequireAuth>
+                      <TicketCheckout />
+                    </RequireAuth>
+                  }
                 />
                 <Route
                   path="checkout/result"
                   element={<TicketCheckoutResult />}
                 />
               </Route>
+
               <Route
                 path="dashboard"
                 element={
@@ -117,7 +126,9 @@ const App = function AppComponent() {
                   }
                 />
               </Route>
+
               <Route path="login" element={<Login />} />
+
               <Route path="register" element={<Register />} />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />

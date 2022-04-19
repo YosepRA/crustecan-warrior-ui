@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 
@@ -32,11 +33,18 @@ const TransactionList = function TransactionListComponent({ search }) {
 
   return (
     <Box component="section" className="transaction-list">
-      <Box className="transaction-list__list" sx={{ mb: 5 }}>
+      <Grid
+        container
+        spacing={2}
+        className="transaction-list__list"
+        sx={{ mb: 5 }}
+      >
         {transactions.map((transaction) => (
-          <TransactionCard key={transaction._id} transaction={transaction} />
+          <Grid item xs={12} md={6} key={transaction._id}>
+            <TransactionCard transaction={transaction} />
+          </Grid>
         ))}
-      </Box>
+      </Grid>
 
       <Pagination
         page={search.page}
