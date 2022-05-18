@@ -11,6 +11,7 @@ import SectionTitle from '../components/styled/SectionTitle.jsx';
 import DemoSponsor from '../components/styled/DemoSponsor.jsx';
 import FixtureCard from '../components/FixtureCard.jsx';
 import HonorCard from '../components/HonorCard.jsx';
+import NoData from '../components/NoData.jsx';
 import { useGetFixtureListQuery } from '../store/fixture/service.js';
 import bannerBg from '../assets/leah-hetteberg-b81O1CJmKqY-unsplash.jpg';
 import memberBg from '../assets/leah-hetteberg-0pSsWN8uqAE-unsplash.jpg';
@@ -38,7 +39,7 @@ const Home = function HomeComponent() {
   /* ========== Utilities ========== */
 
   // Get first fixture and transform its date string to date object.
-  const nextFixture = fixtures && {
+  const nextFixture = fixtures?.data.length > 0 && {
     ...fixtures.data[0],
     date: new Date(fixtures.data[0].date),
   };
@@ -66,10 +67,11 @@ const Home = function HomeComponent() {
             alignItems: 'center',
             width: 1,
             height: { xs: 240, sm: 340 },
-            background: `fixed url(${bannerBg}) no-repeat top center/100%`,
+            background: `fixed url(${bannerBg}) no-repeat top 10% center/140%`,
             backgroundSize: { sm: '110%' },
             backgroundPosition: {
-              md: 'top 60% left 50%',
+              sm: 'top 60% left 50%',
+              md: 'top 40% left 50%',
               lg: 'top 30% left 50%',
             },
             ':after': {
@@ -116,9 +118,11 @@ const Home = function HomeComponent() {
       <SectionWrapper className="next-fixture">
         <SectionTitle variant="h4">Next Fixture</SectionTitle>
 
-        {isLoading ? (
-          <Typography>Loading...</Typography>
-        ) : (
+        {isLoading && <Typography>Loading...</Typography>}
+
+        {!isLoading && fixtures?.data.length === 0 && <NoData />}
+
+        {!isLoading && fixtures?.data.length > 0 && (
           <FixtureCard fixture={nextFixture} featured />
         )}
       </SectionWrapper>

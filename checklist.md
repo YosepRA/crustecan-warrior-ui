@@ -10,6 +10,8 @@ Random thoughts and concerns while on development. Finished items will have ✅ 
 - Checkout seat selection validations. Unless the data are valid, keep them in seat selection page and away from payment page.
   - No empty field.
   - No same seat.
+- Checkout seat live selection validation.  
+  If seat #1 already chooses "A-001-0001", then prevent user from making the same seat choice for the next seat inputs.
 - Global notification system.
 - Global loading page system.
 - Work on the footer. ✅
@@ -30,7 +32,7 @@ Random thoughts and concerns while on development. Finished items will have ✅ 
 - Unavailable feature alert window. Use a custom alert window than using browser alert.
 - Form validation. _Duh..._
 
-## Fixes/Refactors
+## Fix/Refactor
 
 - Think of a better `key` for seat selection checkout page.
 - Enable route protection on checkout page.
@@ -57,3 +59,4 @@ Random thoughts and concerns while on development. Finished items will have ✅ 
   - It's behind membership section's black overlay.
   - It's above the footer.
 - Dynamic `Backdrop.jsx` z-index.
+- Add favicon.

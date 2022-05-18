@@ -11,3 +11,8 @@ API repository: https://github.com/YosepRA/crustecan-warrior-api
 ## Start Development Server
 
 `npm run dev`
+
+## Environment Variables
+
+- `VITE_API_ENDPOINT`  
+  Server base URL.
