@@ -28,7 +28,7 @@ function sortFixturesByMonth(fixtures) {
 }
 
 function unavailableFeatureAlert(name) {
-  alert(`${name} is not available yet.`);
+  alert(`${name} feature is not available yet.`);
 }
 
 export { promiseResolver, sortFixturesByMonth, unavailableFeatureAlert };

@@ -108,7 +108,7 @@ const FixtureList = function FixtureListComponent({
       ) : (
         <Container sx={{ maxWidth: { sm: 668 } }}>
           <Box component="section" sx={{ mb: 4 }} className="fixtures__list">
-            {fixtureList.length === 0 ? <NoData /> : fixtureList}
+            {fixtureList?.length === 0 ? <NoData /> : fixtureList}
           </Box>
 
           <LoadMoreButton

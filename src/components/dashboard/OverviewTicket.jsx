@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 
 import { useGetTicketListQuery } from '../../store/dashboard/service.js';
+import OverviewSectionHeader from './OverviewSectionHeader.jsx';
 import TicketCard from '../ticket/TicketCard.jsx';
 
 const OverviewTicket = function OverviewTicketComponent() {
@@ -14,39 +15,43 @@ const OverviewTicket = function OverviewTicketComponent() {
   });
 
   if (isLoading) {
-    return <Typography>Loading...</Typography>;
-  }
-
-  if (!queryData) {
-    return <Typography>Data is not found.</Typography>;
+    return (
+      <Box component="section" className="overview__ticket" sx={{ mb: 5 }}>
+        <OverviewSectionHeader title="Latest Tickets" />
+        <Typography>Loading...</Typography>;
+      </Box>
+    );
   }
 
   const { data: tickets } = queryData;
 
   return (
     <Box component="section" className="overview__ticket" sx={{ mb: 5 }}>
-      <Typography
-        variant="h5"
-        component="h2"
-        className="overview__title"
-        sx={{ mb: 1, color: 'text.secondary' }}
-      >
-        Latest Tickets
-      </Typography>
+      <OverviewSectionHeader title="Latest Tickets" />
 
-      <Grid container className="overview__list" spacing={2} sx={{ mb: 2 }}>
-        {tickets.map((ticket) => (
-          <Grid item xs={12} md={6} key={ticket._id}>
-            <TicketCard ticket={ticket} showDownloadBtn />
+      {queryData.length === 0 && (
+        <Typography sx={{ p: 1, textAlign: 'center' }}>
+          Ticket data is empty
+        </Typography>
+      )}
+
+      {queryData.length > 0 && (
+        <>
+          <Grid container className="overview__list" spacing={2} sx={{ mb: 2 }}>
+            {tickets.map((ticket) => (
+              <Grid item xs={12} md={6} key={ticket._id}>
+                <TicketCard ticket={ticket} showDownloadBtn />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
 
-      <Box className="overview__action">
-        <Link component={RouterLink} to="../ticket">
-          View more
-        </Link>
-      </Box>
+          <Box className="overview__action">
+            <Link component={RouterLink} to="../ticket">
+              View more
+            </Link>
+          </Box>
+        </>
+      )}
     </Box>
   );
 };

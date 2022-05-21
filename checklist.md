@@ -31,6 +31,10 @@ Random thoughts and concerns while on development. Finished items will have ✅ 
 - Checkout to have its own navigation bar. To minimize distraction while checking out, remove any unnecessary elements. Imagine this navbar to have that "back button" that will direct user back to "buy ticket" page. Again, it shouldn't be fancy at all. Minimize distraction is the goal.
 - Unavailable feature alert window. Use a custom alert window than using browser alert.
 - Form validation. _Duh..._
+- "Try again" button.  
+  An interactive button to trigger refetch should the request fails. It should also include helpful error messages to signify whether the refetch could be futile.
+- Checkout result page.  
+  Both successful and failed with helpful text and simple graphics.
 
 ## Fix/Refactor
 
@@ -60,3 +64,6 @@ Random thoughts and concerns while on development. Finished items will have ✅ 
   - It's above the footer.
 - Dynamic `Backdrop.jsx` z-index.
 - Add favicon.
+- Fetch error handling. Don't leave the user hanging. Of course, we need to put RTK Query's behavior in mind.
+- Incorrect Mongo ID pattern.  
+  The server will crash for instance when it was given an incorrect Mongo ID, e.g. More than 12 digits.

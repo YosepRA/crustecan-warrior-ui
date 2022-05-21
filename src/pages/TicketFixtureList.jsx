@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import { useGetFixtureListQuery } from '../store/fixture/service.js';
 import PageTitleBanner from '../components/PageTitleBanner.jsx';
 import FixtureCard from '../components/FixtureCard.jsx';
+import NoData from '../components/NoData.jsx';
 import withSearchParams from '../components/withSearchParams.jsx';
 import { sortFixturesByMonth } from '../utilities/helpers.js';
 
@@ -111,7 +112,7 @@ const TicketFixtureList = function TicketFixtureListComponent({
             sx={{ mb: 4 }}
             className="ticket-fixture__list"
           >
-            {fixtureList}
+            {fixtureList?.length === 0 ? <NoData /> : fixtureList}
           </Box>
 
           <LoadMoreButton

@@ -25,8 +25,12 @@ const TransactionList = function TransactionListComponent({ search }) {
     return <Typography>Loading...</Typography>;
   }
 
-  if (!queryData) {
-    return <Typography>Data is not found.</Typography>;
+  if (queryData.length === 0) {
+    return (
+      <Typography sx={{ p: 1, textAlign: 'center' }}>
+        Transaction data is empty
+      </Typography>
+    );
   }
 
   const { data: transactions, totalPages } = queryData;

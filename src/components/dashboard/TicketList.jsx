@@ -25,8 +25,12 @@ const TicketList = function TicketListComponent({ search }) {
     return <Typography>Loading...</Typography>;
   }
 
-  if (!queryData) {
-    return <Typography>Data is not found.</Typography>;
+  if (queryData.length === 0) {
+    return (
+      <Typography sx={{ p: 1, textAlign: 'center' }}>
+        Ticket data is empty
+      </Typography>
+    );
   }
 
   const { data: tickets, totalPages } = queryData;

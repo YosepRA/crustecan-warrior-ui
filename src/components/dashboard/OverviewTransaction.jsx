@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 
 import { useGetTransactionListQuery } from '../../store/dashboard/service.js';
+import OverviewSectionHeader from './OverviewSectionHeader.jsx';
 import TransactionCard from './TransactionCard.jsx';
 
 const OverviewTransaction = function OverviewTransactionComponent() {
@@ -14,39 +15,43 @@ const OverviewTransaction = function OverviewTransactionComponent() {
   });
 
   if (isLoading) {
-    return <Typography>Loading...</Typography>;
-  }
-
-  if (!queryData) {
-    return <Typography>Data is not found.</Typography>;
+    return (
+      <Box component="section" className="overview__transaction" sx={{ mb: 2 }}>
+        <OverviewSectionHeader title="Latest Transactions" />
+        <Typography>Loading...</Typography>;
+      </Box>
+    );
   }
 
   const { data: transactions } = queryData;
 
   return (
     <Box component="section" className="overview__transaction" sx={{ mb: 2 }}>
-      <Typography
-        variant="h5"
-        component="h2"
-        className="overview__title"
-        sx={{ mb: 1, color: 'text.secondary' }}
-      >
-        Latest Transactions
-      </Typography>
+      <OverviewSectionHeader title="Latest Transactions" />
 
-      <Grid container spacing={2} className="overview__list" sx={{ mb: 2 }}>
-        {transactions.map((transaction) => (
-          <Grid item xs={12} md={6} key={transaction._id}>
-            <TransactionCard transaction={transaction} />
+      {queryData.length === 0 && (
+        <Typography sx={{ p: 1, textAlign: 'center' }}>
+          Transaction data is empty
+        </Typography>
+      )}
+
+      {queryData.length > 0 && (
+        <>
+          <Grid container spacing={2} className="overview__list" sx={{ mb: 2 }}>
+            {transactions.map((transaction) => (
+              <Grid item xs={12} md={6} key={transaction._id}>
+                <TransactionCard transaction={transaction} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
 
-      <Box className="overview__action">
-        <Link component={RouterLink} to="../transaction">
-          View more
-        </Link>
-      </Box>
+          <Box className="overview__action">
+            <Link component={RouterLink} to="../transaction">
+              View more
+            </Link>
+          </Box>
+        </>
+      )}
     </Box>
   );
 };
