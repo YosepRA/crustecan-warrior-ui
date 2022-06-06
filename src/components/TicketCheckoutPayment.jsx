@@ -11,6 +11,9 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 import { createCheckoutSession } from '../store/checkout/slice.js';
 
+const { VITE_DEMO } = import.meta.env;
+const demo = VITE_DEMO === 'true';
+
 const paymentOptionModel = [
   { label: 'Credit Card', icon: CreditCardIcon, value: 'credit-card' },
   // {
@@ -159,7 +162,7 @@ const TicketCheckoutPayment = function TicketCheckoutPaymentComponent({
           color="primary"
           size="large"
           onClick={handleCheckout}
-          disabled={loading}
+          disabled={loading || demo}
         >
           {loading && (
             <CircularProgress color="inherit" size="20px" sx={{ mr: 0.5 }} />

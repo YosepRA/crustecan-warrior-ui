@@ -14,6 +14,9 @@ import UserPromptHeader from '../components/styled/UserPromptHeader.jsx';
 import UserPromptTextField from '../components/styled/UserPromptTextField.jsx';
 import LineSeparator from '../components/styled/LineSeparator.jsx';
 
+const { VITE_DEMO } = import.meta.env;
+const demo = VITE_DEMO === 'true';
+
 const formModel = [
   { type: 'text', name: 'name', label: 'Full Name' },
   { type: 'text', name: 'email', label: 'Email' },
@@ -102,7 +105,7 @@ const Register = function LoginComponent() {
                 type="submit"
                 variant="contained"
                 sx={{ width: 1 }}
-                disabled={isSubmitting}
+                disabled={isSubmitting || demo}
               >
                 {isSubmitting && (
                   <CircularProgress

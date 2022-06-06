@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
 import Fab from '@mui/material/Fab';
 import Zoom from '@mui/material/Zoom';
 import Tooltip from '@mui/material/Tooltip';
@@ -9,6 +10,9 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import MainNavigation from './MainNavigation.jsx';
 import Footer from './Footer.jsx';
+
+const { VITE_DEMO } = import.meta.env;
+const demo = VITE_DEMO === 'true';
 
 const Layout = function LayoutComponent() {
   const scrollTrigger = useScrollTrigger();
@@ -35,6 +39,13 @@ const Layout = function LayoutComponent() {
           mb: 8,
         }}
       >
+        {demo && (
+          <Alert severity="info" sx={{ m: '-6px 0 1rem' }}>
+            You are currently using the <b>demo</b> build. Some features will be
+            disabled.
+          </Alert>
+        )}
+
         <Outlet />
       </Box>
 
