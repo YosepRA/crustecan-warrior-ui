@@ -67,3 +67,5 @@ Random thoughts and concerns while on development. Finished items will have ✅ 
 - Fetch error handling. Don't leave the user hanging. Of course, we need to put RTK Query's behavior in mind.
 - Incorrect Mongo ID pattern.  
   The server will crash for instance when it was given an incorrect Mongo ID, e.g. More than 12 digits.
+- Multiple seat order cards spacing. Use margin bottom.
+- There is a semicolon on Overview components' loading state. Delete it.
